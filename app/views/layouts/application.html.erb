@@ -1,24 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Microposts</title>
+  <title>MicroPosts.com | <%= yield :title %></title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-	<header>
-		<nav>
-			<li><%= link_to 'MicroPosts.com', home_path %>
-			</li>
-			<ul>
-				<li><%= link_to 'home', home_path %></li>
-				<li><%= link_to 'help', help_path %></li>
-			</ul>
-		</nav>
+	<header class='navbar navbar-fixed-top'>
+		<div class='navbar-inner'>
+			<div class='container'>
+		    <nav>
+			    <%= link_to 'MicroPosts.com', root_path, id: 'logo' %>
+			    <ul class='nav pull-right'>
+				    <li><%= link_to 'home', root_path %></li>
+				    <li><%= link_to 'help', help_path %></li>
+			    </ul>
+		    </nav>
+	    </div>
+	  </div>
 	</header>
-
-<%= yield %>
+  
+  <div class='container'>
+    <%= yield %>
+  </div>
 
 </body>
 </html>
