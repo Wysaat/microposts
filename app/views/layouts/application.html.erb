@@ -7,6 +7,16 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+	<header>
+		<nav>
+			<li><%= link_to 'MicroPosts.com', home_path %>
+			</li>
+			<ul>
+				<li><%= link_to 'home', home_path %></li>
+				<li><%= link_to 'help', help_path %></li>
+			</ul>
+		</nav>
+	</header>
 
 <%= yield %>
 
