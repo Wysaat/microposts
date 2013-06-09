@@ -15,6 +15,7 @@
 			    <ul class='nav pull-right'>
 				    <li><%= link_to 'home', root_path %></li>
 				    <li><%= link_to 'help', help_path %></li>
+				    <li><%= link_to 'sign in', '#' %></li>
 			    </ul>
 		    </nav>
 	    </div>
@@ -25,5 +26,19 @@
     <%= yield %>
   </div>
 
+  <footer class='footer'>
+  			<small>
+  		    <p> Copyright (c) MicroPosts, Inc 2013-2017</p>
+  		  </small>
+  		  <nav>
+  		    <ul>
+  			    <li><%= link_to 'about',   about_path %></li>
+  			    <li><%= link_to 'contact', contact_path %></li>
+  			    <li><%= link_to 'news',    news_path %></li>
+  			  </ul>
+  		  </nav>
+  	  </div>
+  	</div>
+  </footer>
 </body>
 </html>

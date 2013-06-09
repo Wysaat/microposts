@@ -16,7 +16,8 @@ body {
 
 h1 {
   margin-bottom: 30px;
-  font-size: 1pt;
+  font-size: .2pt;
+  text-transform: uppercase;
 }
 
 #logo {
@@ -33,4 +34,31 @@ h1 {
 #logo:hover {
 	color: rgb(0,0,0);
 	text-decoration: none;
+}
+
+/* footer */
+
+footer {
+	margin-top: 100px;
+	padding-top: 5px;
+	border-top: 1px solid #eaeaea;
+}
+
+footer p {
+	color: #555;
+	float: left;
+}
+
+footer p:hover {
+	color: #222;
+}
+
+footer ul {
+	float: right;
+	list-style: none;
+}
+
+footer li {
+	float: left;
+	margin-left: 10px;
 }
