@@ -5,6 +5,8 @@ class SessionsController < ApplicationController
 
 	def create
 		@user = User.find_by_email(params[:session][:email])
+		sign_in @user
 		redirect_to @user
+	end
 
 end
