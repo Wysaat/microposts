@@ -51,6 +51,8 @@ Microposts::Application.routes.draw do
   # root :to => 'welcome#index'
   resources :users
 
+  resources :sessions
+
   root to: 'static_pages#home'
 
   match '/contact', to: 'static_pages#contact'
@@ -58,6 +60,7 @@ Microposts::Application.routes.draw do
   match '/about',   to: 'static_pages#about'
   match '/help',    to: 'static_pages#help'
   match '/signup',  to: 'users#new'
+  match '/signin',  to: 'sessions#new'
 
   # See how all your routes lay out with "rake routes"
 
