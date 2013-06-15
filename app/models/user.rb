@@ -10,4 +10,14 @@ class User < ActiveRecord::Base
 	validates :email, presence: true, format: {with: EMAIL},
 	          uniqueness: {case_sensitive: false}
 
+	before_save :create_remember_token
+
+	has_many :microposts
+
+  private
+
+    def create_remember_token
+    	self.remember_token = SecureRandom.urlsafe_base64
+    end
+
 end

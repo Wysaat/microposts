@@ -1,6 +1,12 @@
 <% provide :title, "home" %>
 
-<div class='center hero-unit'>
-  <h1>Welcome to MicroPosts.Com!</h1>
-  <%= link_to "sign up!", signup_path, class: 'btn btn-large btn-primary' %>
-</div>
+<% if signed_in? %>
+  <p><%= current_user.name %></p>
+  <p><%= current_user.email %></p>
+
+<% else %>
+  <div class='center hero-unit'>
+    <h1>Welcome to MicroPosts.Com!</h1>
+    <%= link_to "sign up!", signup_path, class: 'btn btn-large btn-primary' %>
+  </div>
+<% end %>

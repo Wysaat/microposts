@@ -15,7 +15,11 @@
 			    <ul class='nav pull-right'>
 				    <li><%= link_to 'home', root_path %></li>
 				    <li><%= link_to 'help', help_path %></li>
-				    <li><%= link_to 'sign in', signin_path %></li>
+            <% if signed_in? %>
+              <li><%= link_to 'sign out', signout_path, method: 'delete' %></li>
+            <% else %>
+              <li><%= link_to 'sign in', signin_path %></li>
+            <% end %>
 			    </ul>
 		    </nav>
 	    </div>
