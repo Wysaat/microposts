@@ -2,6 +2,6 @@
 <%= @user.name %>
 <%= @user.email %>
 <%= form_for(@micropost) do |f| %>
-	<%= f.text_area :content %>
-	<%= f.submit "submit!!!" %>
+	<%= f.text_area :content, placeholder: "post here..." %>
+	<%= f.submit "submit!!!", class: "btn btn-large btn-primary" %>
 <% end %>

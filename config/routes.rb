@@ -53,6 +53,8 @@ Microposts::Application.routes.draw do
 
   resources :sessions
 
+  resources :microposts
+
   root to: 'static_pages#home'
 
   match '/contact', to: 'static_pages#contact'

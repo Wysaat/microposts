@@ -3,6 +3,10 @@
 <% if signed_in? %>
   <p><%= current_user.name %></p>
   <p><%= current_user.email %></p>
+  <%= form_for(@micropost) do |f| %>
+    <%= f.text_area :content, placeholder: "posts here here here..." %>
+    <%= f.submit "submit now!!!", class: "btn btn-large btn-primary" %>
+  <% end %>
 
 <% else %>
   <div class='center hero-unit'>
