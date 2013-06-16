@@ -7,4 +7,9 @@ class MicropostsController < ApplicationController
 		end
 	end
 
+	def destroy
+		@micropost.delete
+		redirect_to root_path
+	end
+
 end

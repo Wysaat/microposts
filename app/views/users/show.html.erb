@@ -5,3 +5,9 @@
 	<%= f.text_area :content, placeholder: "post here..." %>
 	<%= f.submit "submit!!!", class: "btn btn-large btn-primary" %>
 <% end %>
+
+<% if @user.microposts.any? %>
+  <ol>
+    <%= render @microposts %>
+  </ol>
+<% end %>

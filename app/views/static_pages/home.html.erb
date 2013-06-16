@@ -1,11 +1,20 @@
 <% provide :title, "home" %>
 
 <% if signed_in? %>
+  <aside class='span4'>
   <p><%= current_user.name %></p>
   <p><%= current_user.email %></p>
   <%= form_for(@micropost) do |f| %>
     <%= f.text_area :content, placeholder: "posts here here here..." %>
     <%= f.submit "submit now!!!", class: "btn btn-large btn-primary" %>
+  </aside>
+
+    <% if @user.microposts.any? %>
+      <p4>you have <%= @microposts.count %> microposts!!!</p4>
+        <ol>
+          <%= render @microposts %>
+        </ol>
+    <% end %>
   <% end %>
 
 <% else %>
