@@ -64,6 +64,7 @@ Microposts::Application.routes.draw do
   match '/signup',  to: 'users#new'
   match '/signin',  to: 'sessions#new'
   match '/signout', to: 'sessions#destroy', via: :delete
+  match '/showall',   to: 'users#showall'
 
   # See how all your routes lay out with "rake routes"
 

@@ -1,1 +1,6 @@
-<li><%= micropost.content %></li>
+<li>
+	<%= micropost.content %>
+	<%= link_to "delete", micropost, method: :delete,
+	                                 confirm: "Sure yo?",
+	                                 title: micropost.content %>
+</li>
