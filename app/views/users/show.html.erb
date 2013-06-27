@@ -2,7 +2,11 @@
 <%= @user.name %>
 <%= @user.email %>
 <% if signed_in? %>
-  <%= link_to 'follow me', '#' %>
+  <%= form_for(current_user.relations.build(followee: @user.name),
+   remote: true) do |f| %>
+  <%= f.hidden_field :followee %>
+  <%= f.submit "follow me!", class: "btn btn-large btn-primary" %>
+  <% end %>
 <% end %>
 <%= form_for(@micropost) do |f| %>
 	<%= f.text_area :content, placeholder: "post here..." %>

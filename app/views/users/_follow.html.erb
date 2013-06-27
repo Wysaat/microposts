@@ -1,0 +1,5 @@
+<% form_for(current_user.relations.build(followee: @user.name),
+   remote: true) do |f| %>
+  <%= f.hidden_field :followee %>
+  <%= f.submit "follow me!", class: "btn btn-large btn-primary" %>
+<% end %>
