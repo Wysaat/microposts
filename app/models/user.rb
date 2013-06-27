@@ -14,6 +14,17 @@ class User < ActiveRecord::Base
 
 	has_many :microposts
 
+	has_many :relations, foreign_key: "follower"
+	has_many :followees, through: :relations, source: :followees
+
+	has_many :reverse_relations, foreign_key: "followee", class_name: "Relation"
+	has_many :followers, through: :reverse_relations, source: :followers
+
+	def follow!(other_user)
+		relations.create!(followed: other_user.name)
+	end
+
+
   private
 
     def create_remember_token
