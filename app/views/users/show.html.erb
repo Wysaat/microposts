@@ -1,9 +1,11 @@
 <%= provide :title, @user.name %>
 <%= @user.name %>
 <%= @user.email %>
+
 <% if signed_in? %>
-  <%= link_to 'follow me', '#' %>
+  <%= render 'follow_form' %>
 <% end %>
+
 <%= form_for(@micropost) do |f| %>
 	<%= f.text_area :content, placeholder: "post here..." %>
 	<%= f.submit "submit!!!", class: "btn btn-large btn-primary" %>

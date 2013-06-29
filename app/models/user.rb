@@ -25,6 +25,11 @@ class User < ActiveRecord::Base
 	# has_many :followed_users, through: :relationships, source: :followed
 	has_many :followeds, through: :relationships
 
+	has_many :reverse_relationships, foreign_key: "followed_id",
+	                                 class_name: "Relationship",
+	                                 dependent: :destroy
+	has_many :followers, through: :reverse_relationships, source: :follower
+
 	#def follow!(other_user)
 	#	relations.create!(followed: other_user.name)
 	#end
@@ -36,9 +41,11 @@ class User < ActiveRecord::Base
 
     def follow!(other_user)
     	self.relationships.create!(followed_id: other_user.id)
+    end
 
     def unfollow!(other_user)
     	self.relationships.find_by_followed_id(other_user.id).destroy
+    end
 
   private
 
