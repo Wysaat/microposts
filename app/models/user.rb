@@ -47,10 +47,25 @@ class User < ActiveRecord::Base
     	self.relationships.find_by_followed_id(other_user.id).destroy
     end
 
+    def is_he_good?(other_user, comment)
+    	other_user.good
+    	unless comment == 'good'
+    		other_user.bad
+    	end
+    end
+
   private
 
     def create_remember_token
     	self.remember_token = SecureRandom.urlsafe_base64
+    end
+
+    def good
+    	self.GoodOrBad = true
+    end
+
+    def bad
+    	self.GoodOrBad = false
     end
 
 end
