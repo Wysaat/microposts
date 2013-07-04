@@ -23,10 +23,11 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if @user.GoodOrBad == true
-      @user.update_attribute(:GoodOrBad, true)
-    elsif @user.GoodOrBad == false
-      @user.update_attribute(:GoodOrBad, false)
+    @good = params[:good]
+    if @good == "true"
+      current_user.he_is_good!(@user)
+    else
+      current_user.he_is_bad!(@user)
     end
   end
 

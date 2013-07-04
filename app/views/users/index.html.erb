@@ -5,7 +5,14 @@
     <% if signed_in? && current_user.admin? %>
       <%= link_to 'delete', user, method: :delete,
                                        confirm: 'really, mr.admin?' %>
-      <%= render 'comment' %>
+      <%= form_for user do |f| %>
+        <input name="good" type="hidden" value=true />
+        <%= f.submit 'good', class: 'btn' %>
+      <% end %>
+      <%= form_for user do |f| %>
+        <input name="good" type="hidden" value=false />
+        <%= f.submit 'bad', class: 'btn' %>
+      <% end %>
     <% end %>
   </li>
 <% end %>

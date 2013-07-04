@@ -48,11 +48,11 @@ class User < ActiveRecord::Base
     end
 
     def he_is_good!(other_user)
-        other_user.GoodOrBad = true
+        other_user.update_attribute(:GoodOrBad, true)
     end
 
     def he_is_bad!(other_user)
-        other_user.GoodOrBad = false
+        other_user.update_attribute(:GoodOrBad, false)
     end
 
   private
