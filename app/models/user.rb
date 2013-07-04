@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-	attr_accessible :name, :email, :password, :password_confirmation, :admin
+	attr_accessible :name, :email, :password, :password_confirmation, :admin, :GoodOrBad
 	has_secure_password
 
 	validates(:name, { :presence => true })
@@ -47,25 +47,18 @@ class User < ActiveRecord::Base
     	self.relationships.find_by_followed_id(other_user.id).destroy
     end
 
-    def is_he_good?(other_user, comment)
-    	other_user.good
-    	unless comment == 'good'
-    		other_user.bad
-    	end
+    def he_is_good!(other_user)
+        other_user.GoodOrBad = true
+    end
+
+    def he_is_bad!(other_user)
+        other_user.GoodOrBad = false
     end
 
   private
 
     def create_remember_token
     	self.remember_token = SecureRandom.urlsafe_base64
-    end
-
-    def good
-    	self.GoodOrBad = true
-    end
-
-    def bad
-    	self.GoodOrBad = false
     end
 
 end
