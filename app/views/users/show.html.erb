@@ -6,9 +6,11 @@
   <%= render 'follow_form' %>
 <% end %>
 
-<%= form_for(@micropost) do |f| %>
-	<%= f.text_area :content, placeholder: "post here..." %>
-	<%= f.submit "submit!!!", class: "btn btn-large btn-primary" %>
+<% if @user == current_user %>
+  <%= form_for(@micropost) do |f| %>
+	  <%= f.text_area :content, placeholder: "post here..." %>
+	  <%= f.submit "submit!!!", class: "btn btn-large btn-primary" %>
+  <% end %>
 <% end %>
 
 <% if @user.microposts.any? %>

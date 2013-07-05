@@ -11,13 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130703163756) do
+ActiveRecord::Schema.define(:version => 20130705171525) do
 
   create_table "microposts", :force => true do |t|
     t.string   "content"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.integer  "upvotes"
+    t.integer  "inappropriate"
+    t.integer  "downvotes"
   end
 
   create_table "relations", :force => true do |t|
