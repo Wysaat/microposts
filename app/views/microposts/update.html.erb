@@ -1,5 +1,7 @@
-<p>OK, you've made some comment, dear <%= current_user %>!</p>
+<p>OK, you've made some comment, dear <%= current_user.name %>!</p>
 
 <p>-----------------------------------------------------------</p>
-<p>--[DEBUG] @micropost.upvotes is <%= @micropost.upvotes %>--</p>
+<p>-------[DEBUG] @micropost.upvotes is <%= @micropost.upvotes %>-------</p>
+<p>-------[DEBUG] @micropost.downvotes is <%= @micropost.downvotes %>-------</p>
+<p>-------[DEBUG] @micropsot.inappropriate is <%= @micropost.inappropriate %>-------</p>
 <p>-----------------------------------------------------------</p>
