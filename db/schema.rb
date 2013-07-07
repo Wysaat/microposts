@@ -11,7 +11,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130706061132) do
+ActiveRecord::Schema.define(:version => 20130707125612) do
+
+  create_table "downvotes", :force => true do |t|
+    t.integer  "downvoter_id"
+    t.integer  "downvoted_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  create_table "inappropriates", :force => true do |t|
+    t.integer  "inappropriate_voter_id"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
+    t.integer  "inappropriate_voted_id"
+  end
 
   create_table "microposts", :force => true do |t|
     t.string   "content"

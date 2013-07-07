@@ -38,6 +38,13 @@ class User < ActiveRecord::Base
   has_many :upvotes, foreign_key: "upvoter_id"
   has_many :upvoteds, through: :upvotes, source: :upvoted
 
+  has_many :downvotes, foreign_key: "downvoter_id"
+  has_many :downvoteds, through: :downvotes, source: :downvoted
+
+  has_many :inappropriates, foreign_key: "inappropriate_voter_id"
+  has_many :inappropriate_voteds, through: :inappropriates,
+                                 source: :inappropriate_voted
+
   #def follow!(other_user)
   # relations.create!(followed: other_user.name)
   #end
@@ -69,6 +76,22 @@ class User < ActiveRecord::Base
 
     def has_upvoted?(micropost)
       self.upvotes.find_by_upvoted_id(micropost.id)
+    end
+
+    def downvote!(micropost)
+      self.downvotes.create!(downvoted_id: micropost.id)
+    end
+
+    def has_downvoted?(micropost)
+      self.downvotes.find_by_downvoted_id(micropost.id)
+    end
+
+    def inappropriate!(micropost)
+      self.inappropriates.create(inappropriate_voted_id: micropost.id)
+    end
+
+    def has_voted_inappropriate?(micropost)
+      self.inappropriates.find_by_inappropriate_voted_id(micropost.id)
     end
 
   private
