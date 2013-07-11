@@ -70,6 +70,7 @@ Microposts::Application.routes.draw do
   match '/signout', to: 'sessions#destroy', via: :delete
 
   match '/plaza/hotposts', to: 'plaza#hotposts'
+  match '/plaza',   to: 'plaza#home'
 
   # See how all your routes lay out with "rake routes"
 

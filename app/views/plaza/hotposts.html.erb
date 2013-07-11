@@ -1,6 +1,6 @@
 <ul>
   <!-- the following erb shoudn't have a equal sign -->
-  <%= @ranked_microposts.first(3).each do |micropost| %>
+  <% @ranked_microposts.first(3).each do |micropost| %>
     <li><%= micropost.content %>
       <%= micropost.whose?.name %>
     </li>
