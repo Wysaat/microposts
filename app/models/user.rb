@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
-  attr_accessible :name, :email, :password, :password_confirmation, :admin, :GoodOrBad
+  attr_accessible :name, :email, :password, :password_confirmation, :admin, :GoodOrBad,
+                  :followers_num, :followings_num
   has_secure_password
 
   validates(:name, { :presence => true })
@@ -10,7 +11,7 @@ class User < ActiveRecord::Base
   validates :email, presence: true, format: {with: EMAIL},
             uniqueness: {case_sensitive: false}
 
-  before_save :create_remember_token
+  before_save :create_remember_token, :num_init
 
   has_many :microposts
 
@@ -53,13 +54,21 @@ class User < ActiveRecord::Base
     def following?(other_user)
       self.relationships.find_by_followed_id(other_user.id)
     end
-
+    
+    ###############################################################################
+    ################ follow should update sth                      ################
+    ################ and don't forget the unfollow counterpart !!! ################
+    ###############################################################################
     def follow!(other_user)
       self.relationships.create!(followed_id: other_user.id)
+      self.update_attribute(:followings_num, self.followings_num + 1)
+      other_user.update_attribute(:followers_num, other_user.followers_num + 1)
     end
 
     def unfollow!(other_user)
       self.relationships.find_by_followed_id(other_user.id).destroy
+      self.update_attribute(:followings_num, self.followings_num - 1)
+      other_user.update_attribute(:followers_num, other_user.followers_num - 1)
     end
 
     def he_is_good!(other_user)
@@ -93,6 +102,47 @@ class User < ActiveRecord::Base
     def has_voted_inappropriate?(micropost)
       self.inappropriates.find_by_inappropriate_voted_id(micropost.id)
     end
+
+    def microposts_score
+      score = 0
+      self.microposts.each { |micropost| score += micropost.score }
+      score
+    end
+
+    def self.rank
+      self.all.sort { |user| user.microposts_score }
+    end
+
+##################################################################################
+##################################################################################
+############# the following two methods are very slow and shoud ##################
+############# not be used unlessed fully understood             ##################
+##################################################################################
+##################################################################################
+    def followings
+      followings = []
+      User.all.each do |user|
+        followings << user if self.following?(user)
+      end
+      followings
+    end
+
+    def followers
+      followers = []
+      User.all.each do |user|
+        followers << user if user.following?(self)
+      end
+      followers
+    end
+##################################################################################
+##################################################################################
+##################################################################################
+
+    def num_init
+      self.followers_num = 0 unless self.followers_num
+      self.followings_num = 0 unless self.followings_num
+    end
+
 
   private
 

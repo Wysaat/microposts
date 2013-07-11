@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130707125612) do
+ActiveRecord::Schema.define(:version => 20130711170010) do
 
   create_table "downvotes", :force => true do |t|
     t.integer  "downvoter_id"
@@ -22,9 +22,9 @@ ActiveRecord::Schema.define(:version => 20130707125612) do
 
   create_table "inappropriates", :force => true do |t|
     t.integer  "inappropriate_voter_id"
+    t.integer  "inappropriate_voted_id"
     t.datetime "created_at",             :null => false
     t.datetime "updated_at",             :null => false
-    t.integer  "inappropriate_voted_id"
   end
 
   create_table "microposts", :force => true do |t|
@@ -67,6 +67,8 @@ ActiveRecord::Schema.define(:version => 20130707125612) do
     t.string   "remember_token"
     t.boolean  "admin"
     t.boolean  "GoodOrBad"
+    t.integer  "followers_num"
+    t.integer  "followings_num"
   end
 
 end

@@ -1,4 +1,21 @@
 <% provide :title, 'plaza' %>
 <p>Welcome to the MicroPosts Inc Plaza!</p>
-<% if signed_in? %>
+<p>Why not look at the <%= link_to "hot posts", plaza_hotposts_path %>?</p>
+<% if signed_in? && current_user.followers_num > 0 %>
+  <% @users.each do |user| %>
+    <% if current_user.following?(user) %>
+      <li><%= link_to user.name, user %> followers: <%= user.followers_num %></li>
+    <% end %>
+  <% end %>
+<% elsif not signed_in? %>
+  <p>Our hottest users, <%= link_to 'sign in', signin_path %> to see more!</p>
+  <% @ranked_users.each do |user| %>
+    <li><%= link_to user.name, user %> followers: <%= user.followers_num %></li>
+  <% end %>
+<% else %>
+  <p>See who you are intereted in and follow him/her!</p>
+  <% @ranked_users.each do |user| %>
+    <li><%= link_to user.name, user %> followers: <%= user.followers_num %></li>
+  <% end %>
+<% end %>
   
