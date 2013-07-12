@@ -22,9 +22,9 @@ ActiveRecord::Schema.define(:version => 20130711170010) do
 
   create_table "inappropriates", :force => true do |t|
     t.integer  "inappropriate_voter_id"
-    t.integer  "inappropriate_voted_id"
     t.datetime "created_at",             :null => false
     t.datetime "updated_at",             :null => false
+    t.integer  "inappropriate_voted_id"
   end
 
   create_table "microposts", :force => true do |t|

@@ -11,7 +11,15 @@ class User < ActiveRecord::Base
   validates :email, presence: true, format: {with: EMAIL},
             uniqueness: {case_sensitive: false}
 
-  before_save :create_remember_token, :num_init
+  ######################################################################
+  ######################################################################
+  ## it must be before_create, if it's before_save, then can't #########
+  ## update current_user, which will cause weird things        #########
+  ######################################################################
+  ######################################################################
+  before_create :create_remember_token
+
+  before_save :num_init
 
   has_many :microposts
 
