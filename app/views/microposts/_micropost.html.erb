@@ -1,21 +1,26 @@
 <li>
 	<%= micropost.content %>
-	<%= link_to "delete", micropost, method: :delete,
-	                                 confirm: "Sure yo?",
-	                                 title: micropost.content %>
-  <% unless current_user == @user %>
-    <%= form_for micropost do |f| %>
-      <input name="buttondown" type="hidden" value="upvote" />
-      <%= f.submit "upvote", class: 'btn' %>
-    <% end %>
-    <%= form_for micropost do |f| %>
-      <input name="buttondown" type="hidden" value="downvote" />
-      <%= f.submit "downvote", class: 'btn' %>
-    <% end %>
+  <% if signed_in? && current_user == @user %>
+	  <%= link_to "delete", micropost, method: :delete,
+	                                   confirm: "Sure yo?",
+	                                   title: micropost.content %>
+  <% end %>
 
-    <%= form_for micropost do |f| %>
-      <input name="buttondown" type="hidden" value="inappropriate" />
-      <%= f.submit "inappropriate", class: 'btn' %>
+  <% if signed_in? %>
+    <% unless current_user == @user %>
+      <%= form_for micropost do |f| %>
+        <input name="buttondown" type="hidden" value="upvote" />
+        <%= f.submit "upvote", class: 'btn' %>
+      <% end %>
+      <%= form_for micropost do |f| %>
+        <input name="buttondown" type="hidden" value="downvote" />
+        <%= f.submit "downvote", class: 'btn' %>
+      <% end %>
+
+      <%= form_for micropost do |f| %>
+        <input name="buttondown" type="hidden" value="inappropriate" />
+        <%= f.submit "inappropriate", class: 'btn' %>
+      <% end %>
     <% end %>
   <% end %>
 </li>

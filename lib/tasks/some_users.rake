@@ -2,8 +2,8 @@ namespace :db do
 	desc "make some users for testing!"
 	task populate: :environment do
 		make_users
-		make_microposts
 		make_relationships
+		make_microposts
 		make_random_votes
 	end
 	
@@ -77,7 +77,7 @@ def rand_vote(voter, voted)
 end
 
 def rand_content
-	f = File.open('galaxy.txt')
+	f = File.open(File.join(Rails.root, 'lib', 'tasks', 'galaxy.txt'))
 
 	count = f.each_line.count
 	f.each_line.rewind

@@ -89,6 +89,7 @@ class User < ActiveRecord::Base
 
     def upvote!(micropost)
       self.upvotes.create!(upvoted_id: micropost.id)
+      micropost.update_attribute(:upvotes, micropost.upvotes + 1)
     end
 
     def has_upvoted?(micropost)
@@ -97,6 +98,7 @@ class User < ActiveRecord::Base
 
     def downvote!(micropost)
       self.downvotes.create!(downvoted_id: micropost.id)
+      micropost.update_attribute(:downvotes, micropost.downvotes + 1)
     end
 
     def has_downvoted?(micropost)
@@ -105,6 +107,7 @@ class User < ActiveRecord::Base
 
     def inappropriate!(micropost)
       self.inappropriates.create(inappropriate_voted_id: micropost.id)
+      micropost.update_attribute(:inappropriate, micropost.inappropriate + 1)
     end
 
     def has_voted_inappropriate?(micropost)
@@ -118,7 +121,7 @@ class User < ActiveRecord::Base
     end
 
     def self.rank
-      self.all.sort { |user| user.microposts_score }
+      self.all.sort_by { |user| user.microposts_score }
     end
 
 ##################################################################################
