@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   attr_accessible :name, :email, :password, :password_confirmation, :admin, :GoodOrBad,
-                  :followers_num, :followings_num
+                  :followers_num, :followings_num, :topics_num, :comments_num
   has_secure_password
 
   validates(:name, { :presence => true })
@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   ######################################################################
   before_create :create_remember_token
 
-  before_save :num_init
+  before_create :num_init
 
   has_many :microposts
 
@@ -53,6 +53,10 @@ class User < ActiveRecord::Base
   has_many :inappropriates, foreign_key: "inappropriate_voter_id"
   has_many :inappropriate_voteds, through: :inappropriates,
                                  source: :inappropriate_voted
+
+  has_many :topics, foreign_key: "owner_id"
+
+  has_many :comments, foreign_key: "owner_id"
 
   #def follow!(other_user)
   # relations.create!(followed: other_user.name)
@@ -150,10 +154,19 @@ class User < ActiveRecord::Base
 ##################################################################################
 
     def num_init
-      self.followers_num = 0 unless self.followers_num
-      self.followings_num = 0 unless self.followings_num
+      self.followers_num = 0
+      self.followings_num = 0
+      self.topics_num = 0
+      self.comments_num = 0
     end
 
+    def update_topics_num
+      self.update_attribute(:topics_num, self.topics_num + 1)
+    end
+
+    def update_comments_num
+      self.update_attribute(:comments_num, self.comments_num + 1)
+    end
 
   private
 

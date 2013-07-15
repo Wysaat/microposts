@@ -11,13 +11,28 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130711170010) do
+ActiveRecord::Schema.define(:version => 20130715055239) do
+
+  create_table "comments", :force => true do |t|
+    t.string   "content"
+    t.integer  "owner_id"
+    t.integer  "topic_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "downvotes", :force => true do |t|
     t.integer  "downvoter_id"
     t.integer  "downvoted_id"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+  end
+
+  create_table "forums", :force => true do |t|
+    t.string   "name"
+    t.integer  "topics_num"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "inappropriates", :force => true do |t|
@@ -51,6 +66,16 @@ ActiveRecord::Schema.define(:version => 20130711170010) do
     t.datetime "updated_at",  :null => false
   end
 
+  create_table "topics", :force => true do |t|
+    t.string   "title"
+    t.string   "content"
+    t.integer  "owner_id"
+    t.integer  "forum_id"
+    t.integer  "comments_num"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
   create_table "upvotes", :force => true do |t|
     t.integer  "upvoter_id"
     t.integer  "upvoted_id"
@@ -69,6 +94,8 @@ ActiveRecord::Schema.define(:version => 20130711170010) do
     t.boolean  "GoodOrBad"
     t.integer  "followers_num"
     t.integer  "followings_num"
+    t.integer  "topics_num"
+    t.integer  "comments_num"
   end
 
 end

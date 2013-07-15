@@ -1,0 +1,7 @@
+<p>Create a new forum here!</p>
+<hr>
+<%= form_for @forum do |f| %>
+  <%= f.label :forum_name %>
+  <%= f.text_field :name %>
+  <%= f.submit "create forum" %>
+<% end %>

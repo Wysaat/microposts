@@ -1,0 +1,21 @@
+<% provide :title, @topic.title %>
+<p>title: <%= @topic.title %></p>
+<p>content: <%= @topic.content %></p>
+<p>author: <%= @topic.owner.name %></p>
+<hr>
+<% @comments.each do |comment| %>
+  <p><%= comment.content %> replyed by <%= comment.owner.name %></p>
+  <hr>
+<% end %>
+
+<% if signed_in? %>
+  <p>Your Reply:</p>
+  <%= form_for @new_comment do |f| %>
+    <%= f.label :content %>
+    <%= f.text_field :content %>
+    <%= hidden_field :topic, :id %>
+    <%= f.submit "reply" %>
+  <% end %>
+<% else %>
+  <p>You need to sign in to reply!</p>
+<% end %>

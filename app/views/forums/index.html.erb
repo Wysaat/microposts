@@ -1,0 +1,12 @@
+<p>See all the forums here!</p>
+<hr>
+<ul>
+  <% @forums.each do |forum| %>
+    <li><%= link_to forum.name, forum %></li>
+  <% end %>
+</ul>
+<hr>
+
+<% if signed_in? && current_user.admin %>
+  <p><%= link_to "create a new forum", forums_new_path %></p>
+<% end %>

@@ -1,0 +1,23 @@
+<% provide :title, @forum.name %>
+<p><%= @forum.name %></p>
+<hr>
+<ul>
+  <% @topics.each do |topic| %>
+    <li><%= link_to topic.title, topic %>  <%= topic.owner.name %></li>
+  <% end %>
+  <hr>
+</ul>
+
+<% if signed_in? %>
+  <p>Got something interesting to say? Start a new thread!</p>
+  <%= form_for @new_topic do |f| %>
+    <%= f.label :thread_name %>
+    <%= f.text_field :title %>
+    <%= f.label :content %>
+    <%= f.text_field :content %>
+    <%= hidden_field :forum, :id %>
+    <%= f.submit "new thread" %>
+  <% end %>
+<% else %>
+  <p>Want to say something? Sign in to start a thread!</p>
+<% end %>

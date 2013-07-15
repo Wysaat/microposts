@@ -50,14 +50,13 @@ Microposts::Application.routes.draw do
   # just remember to delete public/index.html.
   # root :to => 'welcome#index'
   resources :users
-
   resources :sessions
-
   resources :microposts
-
   resources :relations
-
   resources :relationships
+  resources :forums
+  resources :topics
+  resources :comments
 
   root to: 'static_pages#home'
 
@@ -71,6 +70,7 @@ Microposts::Application.routes.draw do
 
   match '/plaza/hotposts', to: 'plaza#hotposts'
   match '/plaza',   to: 'plaza#home'
+  match '/forums/new', to: 'forums#new'
 
   # See how all your routes lay out with "rake routes"
 

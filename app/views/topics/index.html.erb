@@ -1,0 +1,6 @@
+<% provide :title, "threads" %>
+<ul>
+  <% @topics.each do |topic| %>
+    <li><%= link_to topic.title, topic %>  <%= topic.owner.name %></li>
+  <% end %>
+</ul>

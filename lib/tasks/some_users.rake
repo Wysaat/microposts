@@ -1,3 +1,4 @@
+# you can group tasks by placing them in namespaces
 namespace :db do
 	desc "make some users for testing!"
 	task populate: :environment do
@@ -6,7 +7,18 @@ namespace :db do
 		make_microposts
 		make_random_votes
 	end
+
+	task repair: :environment do
+		init_some_data
+	end
 	
+end
+
+def init_some_data
+	User.all.each do |user|
+		user.update_attribute(:topics_num, 0) unless user.topics_num
+		user.update_attribute(:comments_num, 0) unless user.comments_num
+	end
 end
 
 def make_users
