@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   attr_accessible :name, :email, :password, :password_confirmation, :admin, :GoodOrBad,
-                  :followers_num, :followings_num, :topics_num, :comments_num
+                  :followers_num, :followings_num, :topics_num, :comments_num, :pages
   has_secure_password
 
   validates(:name, { :presence => true })
@@ -158,6 +158,7 @@ class User < ActiveRecord::Base
       self.followings_num = 0
       self.topics_num = 0
       self.comments_num = 0
+      self.pages = 0
     end
 
     def update_topics_num

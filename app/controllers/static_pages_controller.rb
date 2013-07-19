@@ -5,6 +5,8 @@ class StaticPagesController < ApplicationController
 		  @micropost = current_user.microposts.build
 		  @user = current_user
 		  @microposts = @user.microposts
+		else
+			@pcomment = Pcomment.all[0]
 		end
 	end
 

@@ -11,13 +11,24 @@ namespace :db do
 	task repair: :environment do
 		init_some_data
 	end
+
+	task pcomment: :environment do
+		init_pcomment
+	end
 	
+end
+
+def init_pcomment
+	pcomment = Pcomment.new
+	pcomment.update_attribute(:good, 0)
+	pcomment.update_attribute(:bad, 0)
 end
 
 def init_some_data
 	User.all.each do |user|
 		user.update_attribute(:topics_num, 0) unless user.topics_num
 		user.update_attribute(:comments_num, 0) unless user.comments_num
+		user.update_attribute(:pages, 0) unless user.pages
 	end
 end
 

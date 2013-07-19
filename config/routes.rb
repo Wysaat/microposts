@@ -58,6 +58,8 @@ Microposts::Application.routes.draw do
   resources :topics
   resources :comments
 
+  resources :pcomments
+
   root to: 'static_pages#home'
 
   match '/contact', to: 'static_pages#contact'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130715055239) do
+ActiveRecord::Schema.define(:version => 20130719064019) do
 
   create_table "comments", :force => true do |t|
     t.string   "content"
@@ -50,6 +50,13 @@ ActiveRecord::Schema.define(:version => 20130715055239) do
     t.integer  "upvotes"
     t.integer  "inappropriate"
     t.integer  "downvotes"
+  end
+
+  create_table "pcomments", :force => true do |t|
+    t.integer  "good"
+    t.integer  "bad"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "relations", :force => true do |t|
@@ -96,6 +103,7 @@ ActiveRecord::Schema.define(:version => 20130715055239) do
     t.integer  "followings_num"
     t.integer  "topics_num"
     t.integer  "comments_num"
+    t.integer  "pages"
   end
 
 end

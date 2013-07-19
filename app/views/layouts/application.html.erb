@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <% if signed_in? %>
+    <% current_user.update_attribute(:pages, current_user.pages + 1) %>
+  <% end %>
   <title>MicroPosts.com | <%= yield :title %></title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-	<header class='navbar navbar-fixed-top'>
-		<div class='navbar-inner'>
-			<div class='container'>
-		    <nav>
-			    <%= link_to 'MicroPosts.com', root_path, id: 'logo' %>
-			    <ul class='nav pull-right'>
-				    <li><%= link_to 'home', root_path %></li>
-				    <li><%= link_to 'help', help_path %></li>
+  <header class='navbar navbar-fixed-top'>
+    <div class='navbar-inner'>
+      <div class='container'>
+        <nav>
+          <%= link_to 'MicroPosts.com', root_path, id: 'logo' %>
+          <ul class='nav pull-right'>
+            <li><%= link_to 'home', root_path %></li>
+            <li><%= link_to 'help', help_path %></li>
             <li><%= link_to 'forum', forums_path %></li>
             <li><%= link_to 'plaza', plaza_path %></li>
             <li><%= link_to 'users', users_path %></li>
@@ -25,29 +28,40 @@
                 <li><%= link_to 'sign in', signin_path %></li>
                 <li><%= link_to 'sign up', signup_path %></li>
             <% end %>
-			    </ul>
-		    </nav>
-	    </div>
-	  </div>
-	</header>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
   
   <div class='container'>
     <%= yield %>
   </div>
 
   <footer class='footer'>
-  			<small>
-  		    <p> Copyright (c) MicroPosts, Inc 2013-2017</p>
-  		  </small>
-  		  <nav>
-  		    <ul>
-  			    <li><%= link_to 'about',   about_path %></li>
-  			    <li><%= link_to 'contact', contact_path %></li>
-  			    <li><%= link_to 'news',    news_path %></li>
-  			  </ul>
-  		  </nav>
-  	  </div>
-  	</div>
-  </footer>
+    <small>
+      <p> Copyright (c) MicroPosts, Inc 2013-2017</p>
+    </small>
+    <nav>
+      <ul>
+        <li><%= link_to 'about',   about_path %></li>
+        <li><%= link_to 'contact', contact_path %></li>
+        <li><%= link_to 'news',    news_path %></li>
+      </ul>
+    </nav>
+    </div>
+  </div>
+</footer>
+
+<% if signed_in? %>
+  <script>
+    var footer = document.getElementsByClassName('footer')[0];
+    var button = document.createElement('button');
+    button.textContent = "<%= current_user.name %>";
+    button.onclick = function() { alert("you are brave, <%= current_user.name %>"); };
+    footer.appendChild(button);
+  </script>
+<% end %>
+    
 </body>
 </html>

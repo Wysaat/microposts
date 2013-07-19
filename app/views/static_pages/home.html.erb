@@ -22,4 +22,10 @@
     <h1>Welcome to MicroPosts.Com!</h1>
     <%= link_to "sign up!", signup_path, class: 'btn btn-large btn-primary' %>
   </div>
+  <p>How do you like the page?</p>
+  <%= form_for(@pcomment, remote: true) do |f| %>
+    <%= f.check_box :good %>good<br>
+    <%= f.check_box :bad %>bad<br>
+    <%= f.button "submit" %>
+  <% end %>
 <% end %>

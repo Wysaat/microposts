@@ -1,0 +1,11 @@
+var form = document.getElementById("edit_pcomment_1");
+var good = form.pcomment_good;
+var bad = form.pcomment_bad;
+if (good.checked == bad.checked) {
+  alert("sorry, please choose one of them");
+}
+else {
+  alert("thank you for your comment");
+}
+good.checked = false;
+bad.checked = false;
