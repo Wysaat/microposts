@@ -2,6 +2,31 @@
 <html>
 <head>
   <% if signed_in? %>
+    <script>
+      window.onbeforeunload = function() {
+        xhr = new XMLHttpRequest();
+        xhr.open('post', '/user/pagecount', false);
+        xhr.setRequestHeader("X-CSRF-Token", "TQIW2MmZMiMA/MChCz4WMGpMh2rlGpGFK7ba/RdHdXk=");
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.send("tom=28&authenticity_token=6oKMLvJeEr7HWUL67jZlUY168LHBOdfNJPIiA3iJ3g4%3D");
+
+        xhr = new XMLHttpRequest();
+        xhr.open('get', '/user/pagecount', false);
+        xhr.send(null);
+        var rpage = xhr.responseText;
+        var index = rpage.indexOf('pagesnumber') + 'pagesnumber'.length;
+        var pagesnumber = '';
+        while (!isNaN(rpage[index])) {
+          pagesnumber += rpage[index++];
+        }
+        pagesnumber = parseInt(pagesnumber);
+        if (pagesnumber == 0) {
+          name = document.cookie.split("=")[0];
+          document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+          alert('bye bye!!!');
+        }
+      };
+    </script>
     <% current_user.update_attribute(:pages, current_user.pages + 1) %>
   <% end %>
   <title>MicroPosts.com | <%= yield :title %></title>
@@ -36,11 +61,15 @@
   
   <div class='container'>
     <%= yield %>
+    <% if signed_in? %>
+      <hr>
+      <p>you have opend <%= current_user.pages %> pages</p>
+    <% end %>
   </div>
 
   <footer class='footer'>
     <small>
-      <p> Copyright (c) MicroPosts, Inc 2013-2017</p>
+      <p>Copyright (c) MicroPosts, Inc 2013-2017</p>
     </small>
     <nav>
       <ul>

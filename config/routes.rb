@@ -74,6 +74,8 @@ Microposts::Application.routes.draw do
   match '/plaza',   to: 'plaza#home'
   match '/forums/new', to: 'forums#new'
 
+  match '/user/pagecount', to: 'users#pcount'
+
   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.

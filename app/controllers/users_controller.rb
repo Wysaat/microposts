@@ -47,4 +47,13 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
+  def pcount
+    render layout: false
+    if signed_in?
+      @user = current_user
+      if params[:tom]
+        @user.update_attribute(:pages, @user.pages - 1)
+      end
+    end
+  end
 end
